@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bracebook</title>
+    <link rel="stylesheet" href="./style/register.css">
+    <link rel="stylesheet" href="./fontawesome-free-6.1.2-web/css/all.css">
+
+</head>
+<body>
+    <form action="/#">
+        <h2>create your post</h2>
+        
+            <input type="text" placeholder="firstname" required>
+            <input type="text" placeholder="secondName" required>
+            <input type="number" placeholder="age" required>
+
+            
+            <input type="text" placeholder="location" required>
+        
+            <input type="email" placeholder="email" required>
+
+            <input type="password" placeholder="password" required>
+            <input type="password" placeholder="confirm password" required>
+
+            <label for="inputTag" class="imagesellection">
+                <i class="fa fa-camera" aria-hidden="true"></i>
+                <input id="inputTag" type="file"/>
+                
+            </label>
+
+            <select name="gender" id="gender">
+                <option value="male">male</option>
+                <option value="femal">femal</option>
+                <option value="privacy">privacy</option>
+            </select>
+
+        
+
+        <button type="submit" name="sendPost"> Post</button>
+    </form>
+</body>
+</html>

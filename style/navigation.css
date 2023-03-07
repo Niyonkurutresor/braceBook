@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family:sans-serif;
+    box-sizing: border-box; 
+}
+
+:root{
+    --size:5rem;
+    --white:white;
+    --whiteblue:rgb(233, 237, 246);
+    --blue:rgb(7, 50, 219);
+    --gray:gray;
+    --green:rgb(6, 148, 6);
+    --black: rgba(0,0,0,1);
+    --notification:red;
+}
+button :hover{
+    cursor: pointer;
+}
+
+
+ /*--------------------------------------------\
+|              navigation page                  |
+ \--------------------------------------------*/
+ body{
+    background-color: var(--whiteblue);
+}
+.index{
+    background-color:var(--white);
+    height: 8vh;
+    display: flex;
+    justify-content: center;
+}
+.index nav{
+    height: 100%;
+    width: 96%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.index .fa:hover{
+    cursor: pointer;
+}
+.navLeft{
+    width: 20%;
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items:center ;
+}
+.navLeft > div{
+ width: fit-content;
+ display: inline-block;
+}
+.navLog{
+    font-size: 2rem;
+    background-color: var(--blue);
+    color: var(--white);
+    padding: .5rem 1rem;
+    border-radius: 50%;
+}
+/* search */
+.navLeft input{
+    outline: none;
+    border: none;
+    height: 2rem;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: .5rem;
+    background-color: var(--whiteblue);
+    width: clamp(10rem, 13rem, 15rem);
+}
+
+.navCenter{
+    width: 40%;
+    height: 100%;   
+}
+ 
+.navRight{
+    width: 20%;
+    height: 100%;
+}
+.navRight .fa{
+    background-color: var(--whiteblue);
+    padding: .5rem;
+    border-radius: 50%;
+}
+.navCenter ul,.navRight ul{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.navRight li{
+    position: relative;
+}
+.notfication{
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: var(--notification);
+    color: var(--white);
+    width: 1rem;
+    min-width: fit-content;
+    height: 1rem;
+    padding: .2rem;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.navCenter .fa{
+    font-size: larger;
+    color: black;
+}
+.index .fa:hover{
+    color: var(--blue);
+}
+
+
+@media screen and (max-width:1023px){
+
+    .navLeft{
+        display: none;
+    }
+    .navCenter{
+        display: none;
+    }
+    .navRight{
+        width: 100%;
+    }
+    
+}
+
+

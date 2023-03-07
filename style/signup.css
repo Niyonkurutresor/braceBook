@@ -1,0 +1,21 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family:sans-serif;
+    box-sizing: border-box; 
+}
+
+:root{
+    --size:5rem;
+    --white:white;
+    --whiteblue:rgb(233, 237, 246);
+    --blue:rgb(7, 50, 219);
+    --gray:gray;
+    --green:rgb(6, 148, 6);
+    --black: rgba(0,0,0,1)
+}
+button :hover{
+    cursor: pointer;
+}

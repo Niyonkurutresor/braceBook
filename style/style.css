@@ -1,0 +1,491 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family:sans-serif;
+    box-sizing: border-box; 
+}
+
+:root{
+    --size:5rem;
+    --white:white;
+    --whiteblue:rgb(233, 237, 246);
+    --blue:rgb(7, 50, 219);
+    --gray:gray;
+    --green:rgb(6, 148, 6);
+    --black: rgba(0,0,0,1);
+}
+button :hover{
+    cursor: pointer;
+}
+hr{
+    margin: 1rem 0 ;
+}
+video{
+    width: 100%;
+}
+img{
+    width: 100%;
+}
+
+iframe{
+    width: 100%;
+}
+h2,h3{
+    margin-bottom:1rem ;
+}
+
+::placeholder{
+    font-size: larger;
+}
+ /*--------------------------------------------\
+|                 home page                     |
+ \--------------------------------------------*/
+
+.userEnvironment{
+    width: 100%;
+    height: 92vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.userEnvironment > div{
+    height: 100%;
+    /* border: black 2px solid; */
+}
+
+.userEnvironment li:hover{
+    cursor: pointer;
+}
+.leftPanel{
+    width: 30%;
+    padding: 2rem;
+}
+.leftPanel ul li{
+ margin-bottom: 1rem;
+ padding: .5rem;
+}
+.leftPanel ul li:hover{
+    background-color: var(--white);
+}
+.leftPanel .fa{
+    color: var(--blue);
+    margin-right: .5rem;
+}
+
+
+.centralPanel{
+    width: 50%;
+    overflow-y:scroll ;
+}
+::-webkit-scrollbar{
+    display: none;
+    width: 0;
+}
+
+.hide{
+    display: none;
+}
+
+
+
+.rightPanel{
+    width: 30%;
+    padding: 2rem;
+}
+
+
+
+ /*--------------------------------------------\
+|                       story                   |
+ \--------------------------------------------*/
+
+ 
+ .stories{
+    background-color: var(--white);
+    margin-top: 2rem;
+    padding: 1rem 0 1rem 1rem;
+    border-radius: .5r;
+    border-radius: 1rem;
+}
+.stories .fa{
+    margin-right: .5rem;
+}
+.stories ul li:hover{
+    color: var(--blue);
+}
+
+/* story navigation */
+.storyNav{
+    height: 8vh;
+    width: 100%;
+ }
+ .storyNav ul{
+    height: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+ }
+ 
+ /* story post */
+.storiesPost{
+    margin-top: .5rem;
+    width: 100%;
+    overflow-x: hidden;
+    position: relative;
+    
+}
+
+.scrollStory{
+    width: fit-content;
+    height: fit-content;
+    display:flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+ }
+ 
+.storiesPost .scrollLeft, .storiesPost .scrollRight{
+ position: absolute;
+ background-color:var(--white);
+ font-size:x-large;
+ padding: .5rem;
+ border-radius: 50%;
+ z-index: 1;
+ bottom: 40%;
+}
+.scrollRight{
+    right: 0;
+}
+.storiesPost .fa:hover{
+    cursor: pointer;
+}
+.storiesPost .fa-angle-right{
+    right: 0;
+}
+.stories ::-webkit-scrollbar{
+    display: none;
+}
+.userStories,.freindStories{
+    height: 10rem;
+    min-width: 7rem;
+    border-radius: 1rem;
+    margin-right: .5rem;
+    position: relative;
+}
+.userStories img,.freindStories img{
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+}
+.friendProfile{
+    background-color: var(--white);
+    position: absolute;
+    top:1rem;
+    left: 1rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.friendProfile img{
+    width: 90%;
+    height: 90%;
+}
+
+ /*--------------------------------------------\
+|                 user posts                    |
+ \--------------------------------------------*/
+.post{
+    background-color: var(--white);
+    margin-top: 2rem;
+    padding: 1rem;
+    border-radius: 1rem;
+}
+.postHeader{
+    width: 100%;
+    height: 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+}
+
+.post .tools .fa:hover,.post .tools >div{
+    cursor: pointer;
+}
+
+.postOwner,.tools,.postInfo,.likeAndComment ul,.moreComments{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.likeAndComment ul{
+    justify-content: space-around;   
+}
+/* view more comments on the page */
+.publicComments {
+    width: 100%;
+    display: none;
+}
+.publicComments >div > div{
+    width: fit-content;
+    display: inline-block;
+    
+}
+.commentContent{
+    background-color:var(--whiteblue);
+    padding: .5rem;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
+.publicComments img{
+    width: 2rem;
+    height: 2rem;
+    border-radius:50% ;
+}
+.postOwner img ,.moreComments img{
+    width:2rem;
+    height: 2rem;
+    border-radius: 50%;
+    margin-right: .5rem;
+}
+.tools{
+    width: 4rem;
+    font-size: larger;
+}
+.postContent{
+    width: 100%;
+    height: fit-content;
+}
+.postInfo{
+    margin-top: 1rem;
+}
+
+
+
+.moreComments .commentContent{
+    width: 90%;
+    background-color: var(--whiteblue);
+    height: 2rem;
+    border-radius: 1rem;
+    padding: 0 .5rem;
+}
+.commentContent{
+    display: flex;
+    align-items: center;
+}
+.commentContent input{
+    width: 90%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: var(--whiteblue);
+    padding-left: 1rem;
+    border-top-left-radius:1rem ;
+    border-bottom-left-radius: 1rem;
+}
+
+
+
+
+
+/* rightPanel */
+
+.rightPanel{
+    text-align: center;
+}
+
+/* home menu */
+
+ .homeMenu{
+    position: absolute;
+    width:50% ;
+    top: 8vh;
+    left: 45%;
+    right: 1rem;
+    background-color: var(--whiteblue);
+    box-shadow: 0 0 4px ;
+    max-height: 90vh;
+    z-index: 2;
+    border-radius: 1rem;
+    display: none;
+}
+.homeMenu .container{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    text-align: left;
+}
+.container .social{
+    background-color:var(--white);
+    width: 60%;
+    padding: 1rem;
+    overflow-y: scroll;
+    border-radius: 1rem;
+}
+.container .create{
+    width: 35%;
+    background-color: var(--white);
+    padding: .5rem;
+    overflow-y: scroll;
+    height: fit-content;
+    max-height: 80vh;
+    border-radius: 1rem;
+}
+
+.container li{
+    margin-bottom: 1rem;
+    padding: .5rem;
+}
+.container li:hover{
+    background-color:var(--whiteblue);
+}
+.container li:hover .fa{
+    color: var(--blue);
+}
+
+
+/* chat */
+.chat{
+    background-color: var(--white);
+    padding:2rem;
+    border-radius: 1rem;
+    overflow: scroll;
+    height: 85vh;
+    display: none;
+}
+
+
+.person{
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: fit-content;
+}
+.chat img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+
+/* notifications */
+.notification{
+    background-color: var(--white);
+    padding:2rem;
+    border-radius: 1rem;
+    overflow: scroll;
+    max-height: 85vh;
+    display: none;
+}
+.notification img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* addFireind */
+.addFireind{
+    background-color: var(--white);
+    padding:2rem;
+    border-radius: 1rem;
+    overflow: scroll;
+    max-height: 85vh;
+    /* display: none; */
+}
+
+.addFireind img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: 1rem;
+}
+
+/* friend request */
+.addFireind{
+    display: none;
+}
+.addFireind .person{
+    background-color: var(--whiteblue);
+    width: 100%;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+.friendRequest{
+    text-align: left;   
+}
+.friendRequest button{
+    min-width: 5rem;
+    height: 2rem;
+    border: none;
+    background-color: var(--blue);
+    border-radius: .5rem;
+    color: white;
+    font-size: large;
+    margin-top: .5rem;
+}
+
+/* js */
+.show{
+    display: block;
+}
+.hide{
+    display: none;
+}
+.blue{
+    color: var(--blue);
+}
+
+@media screen and (max-width:1023px){
+    .leftPanel{
+        display: none;
+    }
+    .rightPanel{
+        
+    }
+    
+    .centralPanel{
+        width: 100%;
+    }
+    .userEnvironment .rightPanel{
+        position: absolute;
+        width: fit-content;
+        min-width: 50%;
+        top:6rem;
+        left: 1rem;
+        height: fit-content;
+        display: none;
+        background-color: orange;
+        padding: 0;
+        border-radius:1rem;
+        z-index: 1;
+    }
+
+    .homeMenu{
+        width: 90vw;
+        top: 0;
+        left: 0;
+     }
+     .chat{
+        width: 100%;
+        height: 90vh;
+        box-shadow: 0 0 2px 1px;
+     }
+     .notification{
+        width:100%;
+        max-height: 90vh;
+        box-shadow: 0 0 2px 1px;
+     }
+     .addFireind{
+        width: 100%;
+        box-shadow: 0 0 2px 1px;
+     }
+}
