@@ -2,7 +2,8 @@
 
 BRACEBOOK
 This is social media project
-front end, will be built in HTML, vanila CSS, vanila JAVASCRIPT
-back end, will be built in vith NODEJS (EXPRESS framework)
+Front end, will be built in HTML, vanila CSS, vanila JAVASCRIPT
+Back end, will be built in vith NODEJS (EXPRESS framework)
+icons(fontawesome-free-6.1.2-web/)
 
 #finctionality
