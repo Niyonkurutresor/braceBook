@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style-type: none;
+    font-family:sans-serif;
+    box-sizing: border-box; 
+}
+
+:root{
+    --size:5rem;
+    --white:white;
+    --whiteblue:rgb(233, 237, 246);
+    --blue:rgb(7, 50, 219);
+    --gray:gray;
+    --green:rgb(6, 148, 6);
+    --black: rgba(0,0,0,1);
+}
+
+
+button :hover{
+    cursor: pointer;
+}
+hr{
+    margin: 1rem 0 ;
+}
+video{
+    width: 100%;
+}
+img{
+    width: 100%;
+}
+
+iframe{
+    width: 100%;
+}
+h2,h3{
+    margin-bottom:1rem ;
+}
+
+::placeholder{
+    font-size: larger;
+}
+
+
+ /*--------------------------------------------\
+|                   chat page                   |
+ \--------------------------------------------*/
+/* difining structure of the three main part of the chat page. */
+.leftpanel{
+    width: 30%;
+    padding: 2rem;
+}
+.centralpanel{
+    width: 50%;
+    padding: 2rem;
+}
+.rightpanel{
+    width: 20%;
+    padding: 2rem;
+}
+body{
+    display: flex;
+
+}
+body >div{
+    height: 90vh;
+    overflow-y: scroll;
+}
+.person{
+    display: flex;
+    align-items: center;
+    padding: .5rem;
+    border-radius: .5rem;
+}
+.person:hover{
+    background-color: var(--whiteblue);
+    cursor: pointer;
+}
+.person .image img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    margin-right: .5rem;
+}
+
+
+/* centralpanel */
+
+.centralpanel .owner, .centralpanel .friend{
+    color:var(--white);
+    background-color: rgb(101, 238, 101);
+    width: fit-content;
+    max-width: 50%;
+    padding: .5rem;
+    border-radius: 1rem;
+    margin:0 0 1rem 5rem;
+    display: block;
+}
+
+.centralpanel  .friend{
+    background-color: var(--whiteblue);
+    color: var(--black);
+    display: block;
+}
+
+
+/* right panel */
+.rightpanel{
+    display: flex;
+    justify-content: center;
+    padding-top: 5rem;
+}
+.rightpanel .userProfile{
+    width:10rem ;
+    height: 10rem;
+}
+.userProfile img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.userProfile h3{
+    text-align: center;
+    margin-top: 1rem;
+}
