@@ -1,0 +1,10 @@
+//npm i @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/plugin-transform-runtime --save-dev
+{
+    "presets": [
+      "@babel/preset-env"
+    ],
+    "plugins": [
+      "@babel/plugin-proposal-class-properties",
+      "@babel/plugin-transform-runtime"
+    ]
+  }
