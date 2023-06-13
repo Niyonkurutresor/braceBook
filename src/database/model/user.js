@@ -11,7 +11,10 @@ const userSchema = new mongoose.Schema({
   },
   age: Number,
   location: String,
-  password: String,
+  password: {
+    type: String,
+    select: false,
+  },
   confirmPassword: String,
   profilepicture: String,
   coverPhoto: String,

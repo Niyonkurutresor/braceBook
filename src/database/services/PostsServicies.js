@@ -20,7 +20,7 @@ class PostServicies {
     }
   }
 
-  static async getComments() {
+  static async getPosts() {
     try {
       return await Post.find();
     } catch (error) {
@@ -28,7 +28,7 @@ class PostServicies {
     }
   }
 
-  static async getcomment(id) {
+  static async getPost(id) {
     try {
       return await Post.findById(id);
     } catch (error) {
