@@ -1,19 +1,5 @@
-/* eslint-disable eqeqeq */
-const NODE_ENV = 'development';
-
-const sendErrDev = (err, res) => {
-
-};
-
-const sendErrProd = (err, res) => {
-
-};
-
-const errorController = (err, req, res) => {
-  if (NODE_ENV == 'development') {
-    sendErrDev(err, res);
-  } else if (NODE_ENV == 'production') {
-    sendErrProd(err, res);
-  }
+/* eslint-disable import/extensions */
+const errorController = (err, req, res, next) => {
+  res.status(err.statusCode).json({ status: err.status, message: err.message });
 };
 export default errorController;

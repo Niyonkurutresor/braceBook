@@ -7,9 +7,9 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
-import xss from 'xss';
+// import xss from 'xss';
 import databaseconnection from './src/database/dbConnection.js';
-import requestLImiter from './src/helper/requestLimiter.js';
+// import requestLImiter from './src/helper/requestLimiter.js';
 import routes from './src/routes/index.js';
 import USerServicies from './src/database/services/userservicies.js';
 import PostServicies from './src/database/services/PostsServicies.js';
@@ -30,10 +30,10 @@ createDefaultData();
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json({ limit: '100kb' }));
-app.use(ExpressMongoSanitize);
-app.use(xss);
-app.use('/api', requestLImiter);
+app.use(express.json());
+app.use(ExpressMongoSanitize());
+// app.use(xss());
+// app.use('/api', requestLImiter);
 app.use('/api/v1', routes);
 
 export default app;

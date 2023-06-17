@@ -1,14 +1,23 @@
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
-import PostServicies from '../database/services/PostsServicies';
-import out from '../helper/response';
-import AppError from '../helper/AppError';
+import PostServicies from '../database/services/PostsServicies.js';
+import AppError from '../helper/AppError.js';
+import outPut from '../helper/response.js';
+import skip from '../helper/requestFilter.js';
 
-class PostsController {
+export class PostsController {
   static async getPosts(req, res, next) {
-    const posts = await PostServicies.getComments();
-    if (!posts) return next(new AppError(404, 'Fail', 'Posts are not found.'));
-    out(res, 200, `Post retireved successfully! ${posts}`);
+    try {
+      const totaldocs = await PostServicies.getPostsNumber();
+      const totalpages = Math.ceil(totaldocs / req.query.limit);
+      const docsOnPage = skip(req.query.page || 1, req.query.limit);
+      if (req.query.page <= 0 || req.query.page > totalpages) return next(new AppError(400, 'Fail', 'Invalid page number'));
+      const posts = await PostServicies.getPagnatedPosts(docsOnPage, req.query.limit);
+      if (!posts) return next(new AppError(404, 'Fail', 'Posts are not found'));
+      outPut(res, 200, 'Posts retreived successfully!', posts);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
   }
 }
-
-export default PostsController;

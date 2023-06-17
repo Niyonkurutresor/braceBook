@@ -7,7 +7,7 @@ const postSchema = new mongoose.Schema({
     type: mongoose.Schema.ObjectId,
     ref: 'User',
   },
-  timePassed: String,
+  timePassed: Number,
   postContent: String,
   comments: [
     {

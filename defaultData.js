@@ -67,28 +67,28 @@ export const users = [
 export const posts = [
   {
     postOwner: '64719fefe4a23d2a53116f55',
-    timePassed: '2min',
+    timePassed: 4,
     postContent: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ex, corporis molestiae fugit fuga perspiciatis natus eligendi tenetur ipsa providen t perferendis numquam maxime quisquam nobis pariatur sapiente, cupiditate sit quos. Necessitatibus voluptate earum vitae aut similique animi libero suscipit veniam totam voluptatem est ducimus, eius dicta laudantium? Rerum recusandae, tenetur voluptas illo impedit mollitia deleniti beatae architecto nihil itaque iusto ipsam consectetur ex consequuntur vitae incidunt aliquid dignissimos id aperiam molestias, nisi, cum sequi rem! Totam natus debitis dolore alias quos officia architecto amet consequatur voluptatum dolor expedita, esse mollitia omnis laudantium placeat eius praesentium sunt iste ? Cupiditate,',
     comments: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
     likes: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
   },
   {
     postOwner: '64719fefe4a23d2a53116f55',
-    timePassed: '2min',
+    timePassed: 2,
     postContent: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis ex, corporis molestiae fugit fuga perspiciatis natus eligendi tenetur ipsa providen t perferendis numquam maxime quisquam nobis pariatur sapiente, cupiditate sit quos. Necessitatibus voluptate earum vitae aut similique animi libero suscipit veniam totam voluptatem est ducimus, eius dicta laudantium? Rerum recusandae, tenetur voluptas illo impedit mollitia deleniti beatae architecto nihil itaque iusto ipsam consectetur ex consequuntur vitae incidunt aliquid dignissimos id aperiam molestias, nisi, cum sequi rem! Totam natus debitis dolore alias quos officia architecto amet consequatur voluptatum dolor expedita, esse mollitia omnis laudantium placeat eius praesentium sunt iste ? Cupiditate,',
     comments: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
     likes: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
   },
   {
     postOwner: '64719fefe4a23d2a53116f55',
-    timePassed: '2min',
+    timePassed: 2.3,
     postContent: './home/Desktop/rukara.jpg',
     comments: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
     likes: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
   },
   {
     postOwner: '64719fefe4a23d2a53116f55',
-    timePassed: '2min',
+    timePassed: 3,
     postContent: './home/Desktop/rukara.mp4',
     comments: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],
     likes: ['647518b31165811ce26e396b', '6476bdf8112c1d3692bed1e1', '6485ce1f3e2902f6834afa6c'],

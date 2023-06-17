@@ -9,12 +9,12 @@
         "sourceType": "module"
     },
     "rules": {
-        "comma-dangle": "warn",
+        "comma-dangle": "off",
         "no-useless-catch": "warn",
         "no-underscore-dangle": "warn",
         "no-plusplus": "warn",
         "linebreak-style": "off",
-        "no-console":"off",
+        "no-console":"warn",
         "no-unused-vars":"warn",
         "no-var":"warn",
         "semi": "warn",

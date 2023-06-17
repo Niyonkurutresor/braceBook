@@ -20,9 +20,17 @@ class PostServicies {
     }
   }
 
-  static async getPosts() {
+  static async getPostsNumber() {
     try {
-      return await Post.find();
+      return await Post.find().count();
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async getPagnatedPosts(skip, limit) {
+    try {
+      return await Post.find().sort({ timePassed: 1 }).limit(limit).skip(skip);
     } catch (error) {
       throw error;
     }
