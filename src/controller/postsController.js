@@ -21,15 +21,28 @@ export class PostsController {
     }
   }
 
- static async updatePost(req,res,next) {
-  try {
-    const { postContent }= req.body;
-    if(!postContent || postContent == '') return next(new AppError(400, 'Fail', 'Please provide new content to replace old one.'));
-    const updates = await PostServicies.updatePost(req.params.id, postContent);
-    if(!updates) return next(new AppError(400, 'Fail', 'Fail to update user post. Try again.'));
-    outPut(res, 200, 'Post updated successfuly!', updates);
-  } catch (error) {
-    next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+  static async updatePost(req, res, next) {
+    try {
+      const { postContent } = req.body;
+      if (!postContent || postContent === '') return next(new AppError(400, 'Fail', 'Please provide new content to replace old one.'));
+      const updates = await PostServicies.updatePost(req.params.id, postContent);
+      if (!updates) return next(new AppError(400, 'Fail', 'Fail to update user post. Try again.'));
+      outPut(res, 200, 'Post updated successfuly!', updates);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
   }
- }
+
+  static async deletePost(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServicies.findPost(id);
+      if (!post) return next(new AppError(400, 'Fail', 'There is no Post with such Id'));
+      const deleted = await PostServicies.deletePost(id);
+      if (!deleted) return next(new AppError(400, 'Fail', 'Something went wront. please try again'));
+      outPut(res, 200, 'Post deleted successfully!');
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
 }
