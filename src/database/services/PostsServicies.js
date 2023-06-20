@@ -43,6 +43,14 @@ class PostServicies {
       throw error;
     }
   }
+
+  static async updatePost(id, postContent) {
+    try {
+      return await Post.findOneAndUpdate({ _id: id }, { postContent });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostServicies;
