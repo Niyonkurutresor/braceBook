@@ -33,4 +33,17 @@ export class PostsController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
+
+  static async deletePost(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServicies.findPost(id);
+      if (!post) return next(new AppError(400, 'Fail', 'There is no Post with such Id'));
+      const deleted = await PostServicies.deletePost(id);
+      if (!deleted) return next(new AppError(400, 'Fail', 'Something went wront. please try again'));
+      outPut(res, 200, 'Post deleted successfully!');
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
 }
