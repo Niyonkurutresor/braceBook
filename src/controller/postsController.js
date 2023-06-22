@@ -20,4 +20,17 @@ export class PostsController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
+
+ static async updatePost(req,res,next) {
+  try {
+    const postId = req.params.id;
+    const { postContent }= req.body;
+    if(!postContent || postContent == '') return next(new AppError(400, 'Fail', 'Please provide new content to replace old one.'));
+    const updates = await PostServicies.updatePost(postId, postContent);
+    if(!updates) return next(new AppError(400, 'Fail', 'Fail to update user post. Try again.'));
+    outPut(res, 200, 'Post updated successfuly!', updates);
+  } catch (error) {
+    next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+  }
+ }
 }
