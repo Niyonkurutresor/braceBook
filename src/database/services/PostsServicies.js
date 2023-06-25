@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 /* eslint-disable import/extensions */
 /* eslint-disable no-useless-catch */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -28,6 +29,14 @@ class PostServicies {
     }
   }
 
+  static async findPost(id) {
+    try {
+      return await Post.findById(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async getPagnatedPosts(skip, limit) {
     try {
       return await Post.find().sort({ timePassed: 1 }).limit(limit).skip(skip);
@@ -47,6 +56,14 @@ class PostServicies {
   static async updatePost(id, postContent) {
     try {
       return await Post.findOneAndUpdate({ _id: id }, { postContent });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deletePost(id) {
+    try {
+      return await Post.findByIdAndDelete(id);
     } catch (error) {
       throw error;
     }
