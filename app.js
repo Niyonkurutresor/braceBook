@@ -29,7 +29,7 @@ async function createDefaultData() {
 createDefaultData();
 
 app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(ExpressMongoSanitize());
 // app.use(xss());

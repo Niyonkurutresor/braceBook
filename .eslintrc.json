@@ -10,7 +10,7 @@
     },
     "rules": {
         "comma-dangle": "off",
-        "no-useless-catch": "warn",
+        "no-useless-catch": "off",
         "no-underscore-dangle": "warn",
         "no-plusplus": "warn",
         "linebreak-style": "off",

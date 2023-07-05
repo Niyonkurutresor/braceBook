@@ -5,6 +5,7 @@ import user from './user.js';
 import post from './posts.js';
 import comments from './comment.js';
 import stories from './storie.js';
+import imageVideosPost from './imageVideoPost.js';
 import errorController from '../controller/errorController.js';
 import AppError from '../helper/AppError.js';
 
@@ -14,6 +15,7 @@ routes.use('/user', user);
 routes.use('/post', post);
 routes.use('/comment', comments);
 routes.use('/stories', stories);
+routes.use('/imageVideosPost', imageVideosPost);
 routes.all('*', (req, res, next) => {
   next(new AppError(404, 'Fail', ` Sorry we can't ${req.method} Information on  ${req.originalUrl}`));
 });
