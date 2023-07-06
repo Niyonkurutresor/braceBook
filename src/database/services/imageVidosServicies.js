@@ -29,7 +29,7 @@ class postPictureVideoService {
 
   static async deletePost(publicId) {
     try {
-      return await ImageVideo.deleteOne({ publicId })
+      return await ImageVideo.deleteOne({ publicId });
     } catch (error) {
       throw error;
     }
