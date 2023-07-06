@@ -7,7 +7,7 @@ import config from './src/helper/config.js';
 const server = http.createServer(app);
 
 process.on('uncaughtException', (err) => {
-  console.log(`${err.name} ${err.message} at ${err.stack}`);
+  console.log(`${err.name} message:${err.message} at ${err.stack}`);
   process.exit(1);
 });
 const port = config.PORT || 5000;

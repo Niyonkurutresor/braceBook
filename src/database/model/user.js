@@ -2,17 +2,36 @@
 import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
-  userName: String,
+  userName: {
+    type: String,
+    required: true,
+  },
   firstname: String,
   lastName: String,
   email: {
     type: String,
+    unique: true,
     required: true,
   },
-  age: Number,
-  location: String,
+  emailVerficationToken: String,
+  emailIsVelfied: {
+    type: Boolean,
+    default: false,
+  },
+  birthDate: Date,
+  location: {
+    latitude: {
+      type: Number,
+      default: 0
+    },
+    longitude: {
+      type: Number,
+      default: 0
+    },
+  },
   password: {
     type: String,
+    required: true,
     select: false,
   },
   confirmPassword: String,
@@ -20,7 +39,7 @@ const userSchema = new mongoose.Schema({
   coverPhoto: String,
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'Privat'],
+    enum: ['male', 'female', 'privat'],
     default: 'privat',
   },
   role: {
@@ -30,7 +49,7 @@ const userSchema = new mongoose.Schema({
   },
   active: {
     type: Boolean,
-    default: true,
+    default: false,
   },
 });
 
