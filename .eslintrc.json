@@ -11,7 +11,7 @@
     "rules": {
         "comma-dangle": "off",
         "no-useless-catch": "off",
-        "no-underscore-dangle": "warn",
+        "no-underscore-dangle": "off",
         "no-plusplus": "warn",
         "linebreak-style": "off",
         "no-console":"warn",
