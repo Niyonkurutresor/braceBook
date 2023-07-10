@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable import/extensions */
 /* eslint-disable no-useless-catch */
 import User from '../model/user.js';
@@ -30,6 +31,46 @@ class USerServicies {
   static async updateEmailverfication(emailVerficationToken) {
     try {
       return await User.findOneAndUpdate({ emailVerficationToken }, { emailIsVelfied: true, emailVerficationToken: '' });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findEmail(email) {
+    try {
+      return await User.findOne({ email }).select('+ password').select('+ userName');
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async forgetPassword(email, passwordChangedAt, passwordResetToken, passwordResetExpired) {
+    try {
+      return await User.findOneAndUpdate({ email }, { passwordChangedAt, passwordResetToken, passwordResetExpired });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findUser(email) {
+    try {
+      return await User.findOne({ email });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async resetPassword(id, password, passwordChangedAt) {
+    try {
+      return await User.findOneAndUpdate({ _id: id }, { password, passwordChangedAt, passwordResetToken: null });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updatePassword(_id, password, passwordChangedAt) {
+    try {
+      return await User.findOneAndUpdate({ _id }, { password, passwordChangedAt });
     } catch (error) {
       throw error;
     }
