@@ -2,7 +2,7 @@
 /* eslint-disable import/extensions */
 const NODE_ENV = 'development';
 const sendErrDev = (err, res) => {
-  res.status(err.statusCode).json({ status: err.status, message: err });
+  res.status(err.statusCode).json({ status: err.status, message: err.message });
 };
 
 const sendErrProd = (err, res) => {
@@ -14,7 +14,8 @@ const sendErrProd = (err, res) => {
   res.status(500).json({ message: 'Something went wrong {this is programing or other unknown error}' });
 };
 
-const errorController = (err, req, res) => {
+// eslint-disable-next-line no-unused-vars
+const errorController = (err, req, res, next) => {
   if (NODE_ENV === 'development') {
     sendErrDev(err, res);
   } else if (NODE_ENV === 'production') {

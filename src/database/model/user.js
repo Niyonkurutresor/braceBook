@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  firstname: String,
+  firstName: String,
   lastName: String,
   email: {
     type: String,
@@ -34,8 +34,7 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
-  confirmPassword: String,
-  profilepicture: String,
+  profilePicture: String,
   coverPhoto: String,
   gender: {
     type: String,
@@ -51,6 +50,12 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  passwordChangedAt: Date,
+  passwordResetToken: String,
+  passwordResetExpired: Date,
+}, {
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true }
 });
 
 const User = mongoose.model('User', userSchema);

@@ -18,7 +18,6 @@ const mailering = async (data, action) => {
   let template;
   switch (action) {
     case 'createAccount':
-      console.log(data);
       subject = 'Sign up successful';
       template = signiupTemplate(data);
       to = data.email;
