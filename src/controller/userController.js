@@ -17,6 +17,7 @@ import { sign } from '../helper/JWT.js';
 import config from '../helper/config.js';
 import cloudinary from '../helper/claudinaryConfiguration.js';
 import upload from '../helper/multerConfiguration.js';
+import { deleteEmetyObj } from '../helper/filterEmptyObjelement.js';
 
 class UserController {
   static async createUser(req, res, next) {
@@ -31,6 +32,7 @@ class UserController {
       const mailSent = await mailering({ userName, email, emailVerficationURL }, 'createAccount');
       if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
       // create a user
+      email = email.toLowerCase();
       const user = await userServicies.createUsers({
         userName, email, password, emailVerficationToken
       });
@@ -81,7 +83,7 @@ class UserController {
     try {
       let { email, password } = req.body;
       email = email.toLowerCase();
-      if (!email || !password) return next(new AppError(401, 'Fail', 'Insert email and password'));
+      if (!email || !password) return next(new AppError(401, 'Fail', 'Plsease, provide both email and password'));
       const isUser = await userServicies.findEmail(email);
       if (!isUser || !await check(password, isUser.password)) return next(new AppError(401, 'Fail', 'Invalid user name or password'));
       const id = isUser._id;
@@ -160,21 +162,26 @@ class UserController {
 
   static async createUserProfileInfo(req, res, next) {
     try {
-      response(res, 200, req.body);
-    } catch (error) {
-      next(new AppError(500, 'ERROR', error));
-    }
-  }
-
-  static async createUserProfileInfor(req, res, next) {
-    try {
-      // id logged in user will update his/her user information.
-      const id = req.user._id;
+      const { email } = req.user;
       const {
         firstName, lastName, birthDate, gender
       } = req.body;
-      if (!firstName || !lastName || !birthDate || !gender) return next(new AppError(404, 'Fail', 'Please provide full information'));
-      await userServicies.createUserProfileInfo(id, firstName, lastName, birthDate, gender);
+      if (!firstName || !lastName || !birthDate || !gender) return next(new AppError(404, 'Fail', 'All fields are required to be filled.'));
+      const userInfo = await userServicies.createUserProfileInfo(email, firstName, lastName, birthDate, gender);
+      response(res, 201, userInfo);
+    } catch (error) {
+      next(new AppError(500, 'Fail', error));
+    }
+  }
+
+  static async updateUserProfileInfo(req, res, next) {
+    try {
+      const userinfo = req.body;
+      const filterdInfo = deleteEmetyObj(userinfo);
+      const email = 'niyonkurutresor17@gmail.com';
+      const userInfo = await userServicies.updateUserProfile(email, filterdInfo);
+      const user = await userServicies.findUserById(userInfo._id);
+      response(res, 201, user);
     } catch (error) {
       next(new AppError(500, 'Fail', error));
     }
