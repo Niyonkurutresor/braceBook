@@ -6,9 +6,9 @@ import AppError from '../helper/AppError.js';
 
 export const isEmailVerfied = async (req, res, next) => {
   try {
-    // Find user by email
     const { email } = req.body;
     const user = await userServicies.findEmail(email);
+    if (!user) return next(new AppError(400, 'Bad request', `User with email ${email} is not found`));
     if (user.emailIsVelfied === false) return next(new AppError(400, 'Fail', 'Please verfie your email'));
     next();
   } catch (error) {

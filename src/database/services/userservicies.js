@@ -76,9 +76,9 @@ class USerServicies {
     }
   }
 
-  static async createUserProfileInfo(id, firstName, lastName, birthDate, gender) {
+  static async createUserProfileInfo(email, firstName, lastName, birthDate, gender) {
     try {
-      return await User.findOneAndUpdate({ id }, {
+      return await User.findOneAndUpdate({ email }, {
         firstName, lastName, birthDate, gender
       });
     } catch (error) {
@@ -89,6 +89,14 @@ class USerServicies {
   static async findUserById(_id) {
     try {
       return await User.findOne({ _id });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateUserProfile(email, info) {
+    try {
+      return await User.findOneAndUpdate({ email }, info);
     } catch (error) {
       throw error;
     }

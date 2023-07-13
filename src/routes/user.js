@@ -18,5 +18,7 @@ routes.post('/userLogin', isEmailVerfied, UserController.userLOgIn);
 routes.post('/forgetPassword', isEmailVerfied, UserController.forgotPassword);
 routes.post('/resetPassword/:email/:resetToken', UserController.resetPassword);
 routes.post('/updatePassword', isLoggedIn, UserController.updatePassword);
-routes.post('/userProfile', isLoggedIn, UserController.createUserProfileInfo);
+routes.post('/createUserProfileInfo', UserController.createUserProfileInfo);
+routes.post('/updateUserProfileInfo', UserController.updateUserProfileInfo);
+
 export default routes;
