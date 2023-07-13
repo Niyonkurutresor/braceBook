@@ -1,10 +1,10 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-expressions */
-export const forgetPassword = (data) => `<!DOCTYPE html>
+export const signiupTemplate = (data) => `<!DOCTYPE html>
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Thank You for reseting password!</title>
+  <title>Thank You for Signing Up!</title>
   <style>
     /* CSS styles for the email template */
     body {
@@ -41,15 +41,15 @@ export const forgetPassword = (data) => `<!DOCTYPE html>
 <body>
   <div class="container">
     <div class="header">
-      <h1>well come. Reset password!</h1>
+      <h1>Thank You for Signing Up!</h1>
     </div>
     <div class="message">
       <p>Dear ${data.userName},</p>
-      <p>Thank you for reseting password on our website. We are happy to help you as a member of our community!</p>
+      <p>Thank you for signing up on our website. We are excited to have you as a new member of our community!</p>
       <p>If you have any questions or need assistance, feel free to contact us. Enjoy exploring our website!</p>
     </div>
     <div class="button-container">
-      <a class="button" href="${data.passwordResetURL}" target="_blank">Reset</a>
+      <a class="button" href="${data.emailVerficationURL}" target="_blank">Confirm Email</a>
     </div>
     <p>If you dident try to siginup on brace book please Ignore this email</p>
   </div>

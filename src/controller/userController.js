@@ -1,9 +1,12 @@
+/* eslint-disable no-sequences */
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-bitwise */
 /* eslint-disable max-len */
 /* eslint-disable radix */
 /* eslint-disable prefer-const */
 /* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
+import fs from 'fs';
 import AppError from '../helper/AppError.js';
 import { generate, check } from '../helper/bcrypt.js';
 import response from '../helper/response.js';
@@ -12,6 +15,8 @@ import mailering from '../helper/nodeMailer.js';
 import userServicies from '../database/services/userservicies.js';
 import { sign } from '../helper/JWT.js';
 import config from '../helper/config.js';
+import cloudinary from '../helper/claudinaryConfiguration.js';
+import upload from '../helper/multerConfiguration.js';
 
 class UserController {
   static async createUser(req, res, next) {
@@ -23,8 +28,8 @@ class UserController {
       // generating URL
       const emailVerficationURL = `${req.protocol}://${req.get('host')}/api/v1/user/verfie/${emailVerficationToken}`;
       // sending mail
-      //   const mailSent = await mailering({ userName, email, emailVerficationURL }, 'createAccount');
-      //   if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
+      const mailSent = await mailering({ userName, email, emailVerficationURL }, 'createAccount');
+      if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
       // create a user
       const user = await userServicies.createUsers({
         userName, email, password, emailVerficationToken
@@ -39,11 +44,12 @@ class UserController {
     try {
       const Token = req.params.id;
       const user = await userServicies.emailVerfication(Token);
-      if (!user) return next(new AppError(403, 'Forbiden', 'There is no tooken to verfie'));
+      if (!user) return next(new AppError(403, 'Forbiden', 'Your email is verfied. There is no tooken to verfi'));
       await userServicies.updateEmailverfication(Token);
       // token generation
-      const { email, _id } = user;
-      const token = await sign({ email, _id });
+      const { email } = user;
+      const id = user._id;
+      const token = await sign({ email, id });
       response(res, 200, `Thank you ${user.userName}. Velification is done successfuly! and your tooken Token${token}Token`);
     } catch (error) {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
@@ -101,7 +107,7 @@ class UserController {
       const passwordResetURL = `${req.protocol}://${req.get('host')}/api/v1/user/resetPassword/${email}/${password}`;
       // Send Email To user
       const { userName } = user;
-      const mailSent = await mailering({ userName, passwordResetURL }, 'createAccount');
+      const mailSent = await mailering({ userName, passwordResetURL, email }, 'forgotPassword');
       if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
       response(res, 200, `Visit your email to reset password. This token will be expired in ${passwordResetExpired / 1000} seconds. ${passwordResetURL}`);
     } catch (error) {
@@ -136,7 +142,7 @@ class UserController {
     try {
       const { password, newPassword, confirmNewPassword } = req.body;
       if (!password || !newPassword || !confirmNewPassword) return next(new AppError(403, 'fail', 'You must fill all fields and correctly'));
-      const user = await userServicies.findEmail(req.LoggedInUser.email);
+      const user = await userServicies.findEmail(req.user.email);
       if (!user) return next(new AppError(404, 'Fail', 'Oops! User not found!'));
       const correctPassword = await check(password, user.password);
       if (!correctPassword) return next(new AppError(403, 'Fail', 'You insert incorct password, please try again.'));
@@ -152,8 +158,27 @@ class UserController {
     }
   }
 
-//   static async createUserProfileInfo(req, res, next) {
-//   }
+  static async createUserProfileInfo(req, res, next) {
+    try {
+      response(res, 200, req.body);
+    } catch (error) {
+      next(new AppError(500, 'ERROR', error));
+    }
+  }
+
+  static async createUserProfileInfor(req, res, next) {
+    try {
+      // id logged in user will update his/her user information.
+      const id = req.user._id;
+      const {
+        firstName, lastName, birthDate, gender
+      } = req.body;
+      if (!firstName || !lastName || !birthDate || !gender) return next(new AppError(404, 'Fail', 'Please provide full information'));
+      await userServicies.createUserProfileInfo(id, firstName, lastName, birthDate, gender);
+    } catch (error) {
+      next(new AppError(500, 'Fail', error));
+    }
+  }
 }
 
 export default UserController;

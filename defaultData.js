@@ -14,6 +14,7 @@ export const users = [
     coverPhoto: './home/Desktop/rukara',
     gender: 'male',
     role: 'user',
+    emailIsVelfied: true,
   },
   {
     userName: 'RWANAMIZA Christian',

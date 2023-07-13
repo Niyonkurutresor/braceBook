@@ -14,7 +14,7 @@ export const createUserSchema = Joi.object({
     .error(new AppError(400, 'Fail', 'Provide correct Email.')),
   password: Joi.string().regex(passwordRegex).required().error(new AppError(400, 'Fail', 'Password must contain at leaste 8characer: One capital letter, number and special character')),
   confirmPassword: Joi.string().required().valid(Joi.ref('password')).error(new AppError(400, 'Fail', 'Passwords do not match')),
-  firstname: Joi.string().trim().uppercase().error(new AppError(400, 'Fail', 'Firs must be character')),
+  firstName: Joi.string().trim().uppercase().error(new AppError(400, 'Fail', 'Firs must be character')),
   lastName: Joi.string().trim().lowercase().error(new AppError(400, 'Fail', 'Last must be character')),
   emailIsVelfied: Joi.boolean().error(new AppError(400, 'Fail', 'Email verfication allow boolean type')),
   birthDate: Joi.date().error(new AppError(400, 'Fail', 'Provide birhd date')),

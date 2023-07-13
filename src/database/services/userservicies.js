@@ -38,7 +38,7 @@ class USerServicies {
 
   static async findEmail(email) {
     try {
-      return await User.findOne({ email }).select('+ password').select('+ userName');
+      return await User.findOne({ email }).select('+ password').select('+ userName').select('+ emailIsVelfied');
     } catch (error) {
       throw error;
     }
@@ -71,6 +71,24 @@ class USerServicies {
   static async updatePassword(_id, password, passwordChangedAt) {
     try {
       return await User.findOneAndUpdate({ _id }, { password, passwordChangedAt });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async createUserProfileInfo(id, firstName, lastName, birthDate, gender) {
+    try {
+      return await User.findOneAndUpdate({ id }, {
+        firstName, lastName, birthDate, gender
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findUserById(_id) {
+    try {
+      return await User.findOne({ _id });
     } catch (error) {
       throw error;
     }

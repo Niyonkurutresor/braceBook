@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 import nodemailer from 'nodemailer';
 import { signiupTemplate } from './signupTemplate.js';
-import updatePassword from './updatePasswordTemplate.js';
+import { updatePassword } from './updatePasswordTemplate.js';
+import { forgetPassword } from './restPasswordTemplate.js';
 import config from './config.js';
 
 const mailering = async (data, action) => {
@@ -20,6 +21,12 @@ const mailering = async (data, action) => {
     case 'createAccount':
       subject = 'Sign up successful';
       template = signiupTemplate(data);
+      to = data.email;
+      break;
+
+    case 'forgotPassword':
+      subject = 'forgotPassword';
+      template = forgetPassword(data);
       to = data.email;
       break;
 

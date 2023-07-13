@@ -1,6 +1,7 @@
+/* eslint-disable implicit-arrow-linebreak */
+/* eslint-disable import/prefer-default-export */
 /* eslint-disable no-unused-expressions */
-const updatePassword = (data) => {
-  ` <!DOCTYPE html>
+export const updatePassword = (data) => ` <!DOCTYPE html>
  <html>
    <head>
      <title> Well come to the Toure services</title>
@@ -12,6 +13,3 @@ const updatePassword = (data) => {
    </body>
  </html> 
    `;
-};
-
-export default updatePassword;
