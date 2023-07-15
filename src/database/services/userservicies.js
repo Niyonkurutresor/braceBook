@@ -101,6 +101,22 @@ class USerServicies {
       throw error;
     }
   }
+
+  static async createUserProfilePicture(email, info) {
+    try {
+      return await User.findOneAndUpdate({ email }, { profilePicture: info });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async updateProflePicture(email, info) {
+    try {
+      return await User.findOneAndUpdate({ email }, { profilePicture: info });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default USerServicies;
