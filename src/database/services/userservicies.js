@@ -117,6 +117,14 @@ class USerServicies {
       throw error;
     }
   }
+
+  static async coverphoto(email, info) {
+    try {
+      return await User.findOneAndUpdate({ email }, { coverPhoto: info });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default USerServicies;
