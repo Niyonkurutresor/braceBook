@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import express from 'express';
