@@ -197,7 +197,7 @@ class UserController {
           // email should come from req.user as there will be logged in user.
           const { email } = req.body;
           const user = await userServicies.findUser(email);
-          if (user.profilePicture.URL) return next(new AppError(400, 'Fail', 'Please you need to update profile picture'))
+          if (user.profilePicture.URL) return next(new AppError(400, 'Fail', 'Please you need to update profile picture'));
           if (req.file) {
             try {
               const result = await cloudinary.v2.uploader.upload(req.file.path, { resource_type: 'image' });
@@ -210,15 +210,16 @@ class UserController {
               response(res, 201, 'Profile picture created successfully!', URL);
               fs.unlinkSync(req.file.path);
             } catch (error) {
-              fs.unlinkSync(req.file.path);
               throw error;
             }
           }
         } catch (error) {
-          next(new AppError(500, 'Fail', error));
+          fs.unlinkSync(req.file.path);
+          throw error;
         }
       });
     } catch (error) {
+      fs.unlinkSync(req.file.path);
       next(new AppError(500, 'Fail', error));
     }
   }
@@ -238,8 +239,9 @@ class UserController {
           try {
             const result = await cloudinary.v2.uploader.upload(req.file.path, { resource_type: 'image', public_id: publicId });
             const URL = result.secure_url;
-            const picINfo = { publicId, URL }
-            await userServicies.updateProflePicture(email, { picINfo });
+            const info = { URL, publicId };
+            const information = deleteEmetyObj(info);
+            await userServicies.createUserProfilePicture(email, information);
             response(res, 201, 'Post is updated successfuly!', result.secure_url);
             fs.unlinkSync(req.file.path);
           } catch (error) {
