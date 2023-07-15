@@ -42,7 +42,14 @@ const userSchema = new mongoose.Schema({
       type: String,
     },
   },
-  coverPhoto: String,
+  coverPhoto: {
+    URL: {
+      type: String,
+    },
+    publicId: {
+      type: String,
+    }
+  },
   gender: {
     type: String,
     enum: ['male', 'female', 'privat'],

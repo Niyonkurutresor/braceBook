@@ -1,3 +1,4 @@
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable import/no-named-as-default */
 /* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
@@ -23,5 +24,7 @@ routes.post('/createUserProfileInfo', UserController.createUserProfileInfo);
 routes.post('/updateUserProfileInfo', UserController.updateUserProfileInfo);
 routes.post('/createProfilePicture', UserController.createProfilePicture);
 routes.post('/updateProfilePicture', UserController.updateProfilePicture);
+routes.post('/coverPhoto', UserController.createCoverPhoto);
+routes.post('/updateCoverphoto', UserController.updateCoverPhoto);
 
 export default routes;
