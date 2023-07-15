@@ -34,7 +34,14 @@ const userSchema = new mongoose.Schema({
     required: true,
     select: false,
   },
-  profilePicture: String,
+  profilePicture: {
+    URL: {
+      type: String,
+    },
+    publicId: {
+      type: String,
+    },
+  },
   coverPhoto: String,
   gender: {
     type: String,
