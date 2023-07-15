@@ -20,5 +20,7 @@ routes.post('/resetPassword/:email/:resetToken', UserController.resetPassword);
 routes.post('/updatePassword', isLoggedIn, UserController.updatePassword);
 routes.post('/createUserProfileInfo', UserController.createUserProfileInfo);
 routes.post('/updateUserProfileInfo', UserController.updateUserProfileInfo);
+routes.post('/createProfilePicture', UserController.createProfilePicture);
+routes.post('/updateProfilePicture', UserController.updateProfilePicture);
 
 export default routes;
