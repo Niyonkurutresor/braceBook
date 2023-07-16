@@ -19,6 +19,7 @@ const app = express();
 
 databaseconnection();
 
+// populating data.
 async function createDefaultData() {
   await USerServicies.deleteUsers();
   await PostServicies.deletePosts();
@@ -26,7 +27,10 @@ async function createDefaultData() {
   await PostServicies.createPosts(posts);
 }
 
-createDefaultData();
+const somethingIntoDatabase = await USerServicies.findAllUsers();
+if (somethingIntoDatabase.length === 0) {
+  createDefaultData();
+}
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
