@@ -20,6 +20,14 @@ class USerServicies {
     }
   }
 
+  static async findAllUsers() {
+    try {
+      return await User.find();
+    } catch (error) {
+      throw error;
+    }
+  }
+
   static async emailVerfication(emailVerficationToken) {
     try {
       return await User.findOne({ emailVerficationToken });
