@@ -133,6 +133,16 @@ class USerServicies {
       throw error;
     }
   }
+
+  static async signupWithGoogle(userName, email, URL) {
+    try {
+      return await User.create({
+        userName, email, profilePicture: URL, password: `${URL} ${Date.now()}`, emailIsVelfied: true,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default USerServicies;
