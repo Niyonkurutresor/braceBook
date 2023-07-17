@@ -14,6 +14,7 @@ import routes from './src/routes/index.js';
 import USerServicies from './src/database/services/userservicies.js';
 import PostServicies from './src/database/services/PostsServicies.js';
 import { users, posts } from './defaultData.js';
+import googleSignup from './src/controller/signupWithGoogleController.js';
 
 const app = express();
 
@@ -36,6 +37,7 @@ app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(ExpressMongoSanitize());
+app.use(googleSignup);
 // app.use(xss());
 // app.use('/api', requestLImiter);
 app.use('/api/v1', routes);
