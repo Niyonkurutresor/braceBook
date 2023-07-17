@@ -7,13 +7,13 @@ import UserController from '../controller/userController.js';
 import { createUserValidator } from '../middleware/validator/createUser.js';
 import { isEmailVerfied } from '../middleware/isEmailVerfied.js';
 import { isLoggedIn } from '../middleware/authorization copy.js';
+import GoogleRoutes from '../controller/signupWithGoogleController.js';
 import { only } from '../middleware/auntentication.js';
 
 const routes = express();
 
 routes.post('/createUser', createUserValidator, UserController.createUser);
 routes.get('/verfie/:id', UserController.emailVelification);
-// route.get('/signupWithGoogle', UserController.signUpWithGoogle);
 // route.get('/signupWithFacebook', UserController.signUpWithFacebook);
 // route.get('/signupWithGithub', UserController.signUpWithGitHub);
 routes.post('/userLogin', isEmailVerfied, UserController.userLOgIn);
