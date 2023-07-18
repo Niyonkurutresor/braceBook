@@ -15,6 +15,8 @@ import USerServicies from './src/database/services/userservicies.js';
 import PostServicies from './src/database/services/PostsServicies.js';
 import { users, posts } from './defaultData.js';
 import googleSignup from './src/controller/signupWithGoogleController.js';
+import facebookSignup from './src/controller/signupWithFacebook.js';
+import errorController from './src/controller/errorController.js';
 
 const app = express();
 
@@ -38,8 +40,10 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(ExpressMongoSanitize());
 app.use(googleSignup);
+app.use(facebookSignup);
 // app.use(xss());
 // app.use('/api', requestLImiter);
 app.use('/api/v1', routes);
+app.use(errorController);
 
 export default app;
