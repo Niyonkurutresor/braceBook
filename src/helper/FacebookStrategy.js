@@ -1,12 +1,14 @@
+/* eslint-disable import/extensions */
 /* eslint-disable import/no-extraneous-dependencies */
 import FacebookStrategy from 'passport-facebook';
+import config from './config.js';
 
 const fbStrategy = new FacebookStrategy(
   {
-    clientID: 'your-app-id', // Replace with your Facebook App ID
-    clientSecret: 'your-app-secret', // Replace with your Facebook App Secret
-    callbackURL: '/auth/facebook/callback', // Replace with your callback URL
-    profileFields: ['id', 'displayName', 'email'], // Specify the user profile fields you need
+    clientID: config.fclientID,
+    clientSecret: config.fclientSecret,
+    callbackURL: config.fcallbackURL,
+    profileFields: ['id', 'displayName', 'email'],
   },
   (accessToken, refreshToken, profile, done) => {
     const user = {

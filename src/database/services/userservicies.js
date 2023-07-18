@@ -137,7 +137,17 @@ class USerServicies {
   static async signupWithGoogle(userName, email, URL) {
     try {
       return await User.create({
-        userName, email, profilePicture: URL, password: `${URL} ${Date.now()}`, emailIsVelfied: true,
+        userName, email, profilePicture: { URL }, password: `${URL} ${Date.now()}`, emailIsVelfied: true,
+      });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async signupWithFacebook(userName, email, URL) {
+    try {
+      return await User.create({
+        userName, email, profilePicture: { URL }, password: `${URL} ${Date.now()}`, emailIsVelfied: true,
       });
     } catch (error) {
       throw error;
