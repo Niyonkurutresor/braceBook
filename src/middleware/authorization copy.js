@@ -23,11 +23,8 @@ export const isLoggedIn = async (req, res, next) => {
   }
   // find if decoded user in our database
   const isUserExiste = await userServicies.findUserById(decoded.id);
-  console.log(decoded)
-  console.log(isUserExiste)
   if (!isUserExiste) return next(new AppError(401, 'Fail', 'User no longer existe'));
   // if user update password after token has been issued.
-  console.log(isUserExiste);
   const tokenIssuedAt = (decoded.iat);
   if (isUserExiste.passwordChangedAt && tokenIssuedAt < parseInt((isUserExiste.passwordChangedAt.getTime()) / 1000)) return next(new AppError(403, 'Fail', 'User has change the password please log in again.}'));
   req.user = decoded;

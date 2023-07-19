@@ -7,7 +7,6 @@ import UserController from '../controller/userController.js';
 import { createUserValidator } from '../middleware/validator/createUser.js';
 import { isEmailVerfied } from '../middleware/isEmailVerfied.js';
 import { isLoggedIn } from '../middleware/authorization copy.js';
-import GoogleRoutes from '../controller/signupWithGoogleController.js';
 import { only } from '../middleware/auntentication.js';
 
 const routes = express();
