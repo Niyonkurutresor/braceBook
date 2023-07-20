@@ -43,7 +43,7 @@ fb.get('/', Passport.authenticate('facebook', { failureRedirect: '/login' }), as
     const token = await sign({ email, id });
     res.json({ token });
   } catch (error) {
-    next(new AppError(500, 'Fail', 'fail to repeat'));
+    next(new AppError(500, 'Fail', error));
   }
 });
 

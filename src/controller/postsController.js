@@ -26,6 +26,9 @@ export class PostsController {
       const postId = req.params.id;
       const { postContent } = req.body;
       if (!postContent || postContent === '') return next(new AppError(400, 'Fail', 'Please provide new content to replace old one.'));
+      const post = await PostServicies.findPost(postId);
+      if (!post) return next(new AppError(404, 'Not found', 'There is no post with such Id'));
+      if ((post.postOwner).toString() !== req.user.id) return next(new AppError(403, 'Forbiden', 'You are not allowed to update others content'));
       const updates = await PostServicies.updatePost(postId, postContent);
       if (!updates) return next(new AppError(400, 'Fail', 'Fail to update user post. Try again.'));
       outPut(res, 200, 'Post updated successfuly!', updates);
@@ -39,9 +42,33 @@ export class PostsController {
       const { id } = req.params;
       const post = await PostServicies.findPost(id);
       if (!post) return next(new AppError(400, 'Fail', 'There is no Post with such Id'));
+      if ((post.postOwner).toString() !== req.user.id) return next(new AppError(403, 'Forbiden', 'Please login as owner of post to delete the post'));
       const deleted = await PostServicies.deletePost(id);
       if (!deleted) return next(new AppError(400, 'Fail', 'Something went wront. please try again'));
       outPut(res, 200, 'Post deleted successfully!');
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async createPost(req, res, next) {
+    try {
+      const postOwner = req.user.id;
+      const postContent = req.body.text;
+      if (!postContent) return next(new AppError(400, 'Fail', 'please provide content'));
+      const post = await PostServicies.createTextPost({ postOwner, postContent });
+      if (!post) return next(new AppError(400, 'Fail', 'Somethng went wrong. Please try again'));
+      outPut(res, 200, 'Post created successfully!', post);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async getpost(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServicies.findPost(id);
+      outPut(res, 200, 'Post found successfully!', post);
     } catch (error) {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
