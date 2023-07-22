@@ -3,11 +3,11 @@
     "info": {
         "version": "1.0.0",
         "description": "BraceBook is the social media pratform used to connect friend from all cornes of the world.",
-        "title": "Fly Right"
+        "title": "Brace Book"
       },
       "servers": [
         {
-            "url": "http://localhost:3000/",
+            "url": "http://localhost:5000/api/v1/",
             "description": "Local server"
         },
         {
@@ -161,7 +161,32 @@
                     "password": {
                         "type": "string",
                         "description": "your password",
-                        "example": "Niyomugabo3"
+                        "example": "Mazuba1234??"
+                    },
+                    "confirmPassword": {
+                        "type": "string",
+                        "description": "your password",
+                        "example": "Mazuba1234??"
+                    }
+                }
+            },
+            "UserLogin": {
+                "required": [
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "niyonkurutresor@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "your password",
+                        "example": "Mazuba1234??"
                     }
                 }
             }
@@ -199,7 +224,7 @@
         }
     ],
     "paths": {
-        "/api/v1/user/signup": {
+        "/user/createUser": {
             "post": {
                 "tags": [
                     "user"
@@ -219,6 +244,39 @@
                 "responses": {
                     "201" : {
                         "description": "User created successfully!"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+        "/user/userLogin": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "User login",
+                "description": "User login",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "You logged in successfully!"
                     },
                     "409" : {
                         "$ref": "#/components/responses/ConflictError"
