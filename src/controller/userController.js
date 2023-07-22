@@ -58,27 +58,6 @@ class UserController {
     }
   }
 
-  //   static async signUpWithGoogle(req, res, next) {
-  //     try {
-  //     } catch (error) {
-  //       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
-  //     }
-  //   }
-
-  //   static async signUpWithFacebook(req, res, next) {
-  //     try {
-  //     } catch (error) {
-  //       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
-  //     }
-  //   }
-
-  //   static async signUpWithGitHub(req, res, next) {
-  //     try {
-  //     } catch (error) {
-  //       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
-  //     }
-  //   }
-
   static async userLOgIn(req, res, next) {
     try {
       let { email, password } = req.body;

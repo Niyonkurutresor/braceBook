@@ -68,6 +68,22 @@ class PostServicies {
       throw error;
     }
   }
+
+  static async createTextPost(data) {
+    try {
+      return await Post.create(data);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findSinglePost(id) {
+    try {
+      return await Post.findOne(id).populate({ path: 'postOwner', select: 'userName profilePicture' });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostServicies;
