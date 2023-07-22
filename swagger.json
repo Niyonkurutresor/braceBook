@@ -278,11 +278,8 @@
                     "200" : {
                         "description": "You logged in successfully!"
                     },
-                    "409" : {
-                        "$ref": "#/components/responses/ConflictError"
-                    },
-                    "422" : {
-                        "$ref": "#/components/responses/ValidationError"
+                    "401" : {
+                        "$ref": "#/components/responses/UnauthorizedError"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"

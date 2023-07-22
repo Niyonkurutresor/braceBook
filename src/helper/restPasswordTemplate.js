@@ -19,7 +19,7 @@ export const forgetPassword = (data) => `<!DOCTYPE html>
       padding: 20px;
       border-radius: 4px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      background-image: url('https://res.cloudinary.com/kist/image/upload/v1689531204/profiles/istockphoto-1145618475-612x612_li9fou.jpg');
+      background-image: url('https://res.cloudinary.com/kist/image/upload/v1690062533/profiles/email%20background/istockphoto-1145618475-612x612_li9fou_dc5xum.jpg');
     }
     .header {
       text-align: center;
