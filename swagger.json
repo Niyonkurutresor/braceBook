@@ -1,0 +1,236 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "version": "1.0.0",
+        "description": "BraceBook is the social media pratform used to connect friend from all cornes of the world.",
+        "title": "Fly Right"
+      },
+      "servers": [
+        {
+            "url": "http://localhost:3000/",
+            "description": "Local server"
+        },
+        {
+            "url": "https://tasty-bass-drawers.cyclic.app/",
+            "description": "Deployed server"
+        }
+    ],
+
+    "components": {
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "To authenticate, include a valid JWT token in the Authorization header using the Bearer scheme. Contact the API administrator to obtain a token."
+            }
+        },
+        "responses": {
+            "NotFound": {
+                "description": "The specified resource was not found",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Resource not found"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BadRequest": {
+                "description": "Bad Request",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Bad Request"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "UnauthorizedError": {
+                "description": "Unauthorized",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Access token is missing or invalid"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Forbidden": {
+                "description": "Forbidden",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Forbidden"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ConflictError": {
+                "description": "Resource exists",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Resource exists"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ValidationError": {
+                "description": "Validation error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Validation error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ServerError": {
+                "description": "Internal server error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "error": {
+                                    "type": "string",
+                                    "example": "Internal server error"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "schemas": {
+            "UserSignup": {
+                "required": [
+                    "userName",
+                    "email",
+                    "password"
+                ],
+                "type": "object",
+                "properties": {
+                    "userName": {
+                        "type": "string",
+                        "description": "your user name",
+                        "example": "NIYONKURU Tresor"
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "niyonkurutresor@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "your password",
+                        "example": "Niyomugabo3"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "user",
+            "description": "User Endpoints"
+        },
+        {
+            "name": "text post",
+            "description": "Post texts Endpoints"
+        },
+        {
+            "name": "vid VS image",
+            "description": "Video and picture Endpoints"
+        },
+        {
+            "name": "like",
+            "description": "Like Endpoints"
+        },
+        {
+            "name": "comment",
+            "description": "Comment Endpoints"
+        }
+    ],
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "security": [
+        {
+            "bearerAuth": []
+        }
+    ],
+    "paths": {
+        "/api/v1/user/signup": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "User signup",
+                "description": "Creation of user account",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserSignup"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201" : {
+                        "description": "User created successfully!"
+                    },
+                    "409" : {
+                        "$ref": "#/components/responses/ConflictError"
+                    },
+                    "422" : {
+                        "$ref": "#/components/responses/ValidationError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        }
+    }
+}

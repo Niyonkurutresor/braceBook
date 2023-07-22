@@ -6,8 +6,10 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import morgan from 'morgan';
+import swaggerUI from 'swagger-ui-express';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 // import xss from 'xss';
+import { readFile } from 'fs/promises';
 import databaseconnection from './src/database/dbConnection.js';
 // import requestLImiter from './src/helper/requestLimiter.js';
 import routes from './src/routes/index.js';
@@ -35,6 +37,11 @@ if (somethingIntoDatabase.length === 0) {
   createDefaultData();
 }
 
+// swagger
+const docs = JSON.parse(
+  await readFile(new URL('./swagger.json', import.meta.url))
+);
+
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
@@ -43,6 +50,7 @@ app.use(googleSignup);
 app.use(facebookSignup);
 // app.use(xss());
 // app.use('/api', requestLImiter);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(docs));
 app.use('/api/v1', routes);
 app.use(errorController);
 
