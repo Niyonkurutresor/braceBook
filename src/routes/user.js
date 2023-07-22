@@ -7,12 +7,7 @@ import UserController from '../controller/userController.js';
 import { createUserValidator } from '../middleware/validator/createUser.js';
 import { isEmailVerfied } from '../middleware/isEmailVerfied.js';
 import { isLoggedIn } from '../middleware/authorization copy.js';
-<<<<<<< Updated upstream
-import GoogleRoutes from '../controller/signupWithGoogleController.js';
-import { only } from '../middleware/auntentication.js';
-=======
 // import { only } from '../middleware/auntentication.js';
->>>>>>> Stashed changes
 
 const routes = express();
 
