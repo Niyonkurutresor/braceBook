@@ -46,4 +46,27 @@ export class PostsController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
+
+  static async createPost(req, res, next) {
+    try {
+      const postOwner = req.user.id;
+      const postContent = req.body.text;
+      if (!postContent) return next(new AppError(400, 'Fail', 'please provide content'));
+      const post = await PostServicies.createTextPost({ postOwner, postContent });
+      if (!post) return next(new AppError(400, 'Fail', 'Somethng went wrong. Please try again'));
+      outPut(res, 200, 'Post created successfully!', post);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async getpost(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServicies.findSinglePost(id);
+      outPut(res, 200, 'Post found successfully!', post);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
 }
