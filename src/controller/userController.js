@@ -28,14 +28,15 @@ class UserController {
       const emailVerficationToken = await randomString();
       // generating URL
       const emailVerficationURL = `${req.protocol}://${req.get('host')}/api/v1/user/verfie/${emailVerficationToken}`;
-      // sending mail
-      const mailSent = await mailering({ userName, email, emailVerficationURL }, 'createAccount');
-      if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
       // create a user
       email = email.toLowerCase();
       const user = await userServicies.createUsers({
         userName, email, password, emailVerficationToken
       });
+      if (!user) return next(new AppError(400, 'Fail', 'Account doesn\'t created. Try again'));
+      // sending mail
+      const mailSent = await mailering({ userName, email, emailVerficationURL }, 'createAccount');
+      if (!mailSent) return next(new AppError(400, 'Fail', 'Email failt to be sent to the user'));
       response(res, 201, `${user.userName} Verfy your email to complete signup process!`, user);
     } catch (error) {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
@@ -62,9 +63,9 @@ class UserController {
     try {
       let { email, password } = req.body;
       email = email.toLowerCase();
-      if (!email || !password) return next(new AppError(401, 'Fail', 'Plsease, provide both email and password'));
+      if (!email || !password) return next(new AppError(400, 'Fail', 'Plsease, provide both email and password'));
       const isUser = await userServicies.findEmail(email);
-      if (!isUser || !await check(password, isUser.password)) return next(new AppError(401, 'Fail', 'Invalid user name or password'));
+      if (!isUser || !await check(password, isUser.password)) return next(new AppError(401, 'Unauthorized', 'Invalid user name or password'));
       const id = isUser._id;
       const token = await sign({ email, id });
       return response(res, 200, `Well come ${isUser.userName}. \nYou login successfuly! Token${token}Token`);
