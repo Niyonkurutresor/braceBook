@@ -257,6 +257,27 @@
                 }
             }
         },
+
+        "/user/verfie/:id": {
+            "get": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "Email verfication",
+                "description": "Verfie token sent to the user email.",
+                "responses": {
+                    "200" : {
+                        "description": "Email verfied successfully!"
+                    },
+                    "403" : {
+                        "$ref": "#/components/responses/Forbidden"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
         "/user/userLogin": {
             "post": {
                 "tags": [
@@ -264,6 +285,37 @@
                 ],
                 "summary": "User login",
                 "description": "User login",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/UserLogin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "You logged in successfully!"
+                    },
+                    "401" : {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/user/userLo": {
+            "post": {
+                "tags": [
+                    "text post"
+                ],
+                "summary": "User login",
+                "description": "User Login",
                 "requestBody": {
                     "required": "true",
                     "content": {
