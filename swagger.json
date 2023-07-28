@@ -189,6 +189,33 @@
                         "example": "Mazuba1234??"
                     }
                 }
+            },
+            "forgetPassword":{
+                "required": [
+                    "email"
+                ],
+                "type": "object",
+                "properties": { 
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "niyonkurutresor@gmail.com"
+                    }
+                }
+            },
+            "resetPassword" :{
+                "required": [
+                    "email"
+                ],
+                "type": "object",
+                "properties": {
+                    
+                    "email": {
+                        "type": "string",
+                        "description": "your email",
+                        "example": "niyonkurutresor@gmail.com"
+                    }
+                }
             }
         }
     },
@@ -278,6 +305,7 @@
                 }
             }
         },
+
         "/user/userLogin": {
             "post": {
                 "tags": [
@@ -309,29 +337,66 @@
             }
         },
 
-        "/user/userLo": {
+        "/user/forgetPassword":{
             "post": {
                 "tags": [
-                    "text post"
+                    "user"
                 ],
-                "summary": "User login",
-                "description": "User Login",
+                "summary": "Forget password",
+                "description": "Forget password",
                 "requestBody": {
                     "required": "true",
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/UserLogin"
+                                "$ref": "#/components/schemas/forgetPassword"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200" : {
-                        "description": "You logged in successfully!"
+                        "description": "success."
                     },
-                    "401" : {
+                    "400" : {
+                        "$ref": "#/components/responses/BadRequest"
+                    },
+                    "401":{
                         "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404":{
+                        "$ref": "#/components/responses/NotFound"
+                    },
+                    "500" : {
+                        "$ref": "#/components/responses/ServerError"
+                    }
+                }
+            }
+        },
+
+        "/user/resetPassword/:email/:resetToken": {
+            "post": {
+                "tags": [
+                    "user"
+                ],
+                "summary": "reset password",
+                "description": "reset lost password by sending email",
+                "requestBody": {
+                    "required": "true",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/resetPassword"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200" : {
+                        "description": "Password updated successfully."
+                    },
+                    "400" : {
+                        "$ref": "#/components/responses/BadRequest"
                     },
                     "500" : {
                         "$ref": "#/components/responses/ServerError"
@@ -339,5 +404,7 @@
                 }
             }
         }
+
+
     }
 }

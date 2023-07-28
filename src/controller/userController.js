@@ -79,7 +79,7 @@ class UserController {
       const { email } = req.body;
       if (!email) return next(new AppError(401, 'Fail', 'Please provide your email'));
       const user = await userServicies.forgetPassword(email);
-      if (!user) return next(new AppError(404, 'Fail', 'There is no such user. please provide email used to signup'));
+      if (!user) return next(new AppError(404, 'Bad request', 'There is no such user. please provide email used to signup'));
 
       const password = await randomString();
       const passwordResetToken = await generate(password);
