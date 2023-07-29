@@ -3,6 +3,7 @@
 const NODE_ENV = 'development';
 const sendErrDev = (err, res) => {
   if (err.message.code === 11000) return res.status(400).json({ status: err.status, message: `${err.message.keyValue.email} is alredy in used, please try onther email` });
+  console.log(err.message.code);
   res.status(err.statusCode).json({ status: err.status, message: err.message });
 };
 
