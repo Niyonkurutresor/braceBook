@@ -1,3 +1,4 @@
+/* eslint-disable no-return-await */
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable import/extensions */
 /* eslint-disable consistent-return */
@@ -67,8 +68,33 @@ export class PostsController {
   static async getpost(req, res, next) {
     try {
       const { id } = req.params;
-      const post = await PostServicies.findPost(id);
+      if (!id) return next(new AppError(400, 'Bad request', 'Id fo the post is required.'));
+      const post = await PostServicies.findSinglePost(id);
+      if (!post) return next(new AppError(404, 'Not found', 'There is no post with such Id.'));
       outPut(res, 200, 'Post found successfully!', post);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async like(req, res, next) {
+    try {
+      const { id } = req.params;
+      const loggedin = req.user.id;
+      if (!id) return next(new AppError(400, 'Bad request', 'Id for the post is required'));
+      const post = await PostServicies.findPost(id);
+      if (!post) return next(new AppError(404, 'Not found', 'Post not found.'));
+      // dislike
+      const postLikes = post.likes;
+      const result = postLikes.includes(loggedin);
+      if (result) {
+        await PostServicies.desilikePost(id, loggedin);
+        return outPut(res, 200, 'You unLiked Post successfully.');
+      }
+      // like
+      const like = await PostServicies.likePost(id, loggedin);
+      if (!like) return next(new AppError(400, 'Fail', 'Something went wrong try again'));
+      outPut(res, 200, 'Post liked successfully.', like);
     } catch (error) {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
