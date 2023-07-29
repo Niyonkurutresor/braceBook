@@ -12,5 +12,6 @@ routes.delete('/:id', isLoggedIn, PostsController.deletePost);
 routes.post('/:id/update', isLoggedIn, updateUserValidator, PostsController.updatePost);
 routes.post('/createPost', isLoggedIn, PostsController.createPost);
 routes.get('/:id', isLoggedIn, PostsController.getpost);
+routes.post('/like/:id', isLoggedIn, PostsController.like);
 
 export default routes;

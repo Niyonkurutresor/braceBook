@@ -79,7 +79,23 @@ class PostServicies {
 
   static async findSinglePost(id) {
     try {
-      return await Post.findOne(id).populate({ path: 'postOwner', select: 'userName profilePicture' });
+      return await Post.findById(id).populate({ path: 'postOwner', select: '-_id userName profilePicture' });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async likePost(id, userId) {
+    try {
+      return await Post.findByIdAndUpdate(id, { $push: { likes: userId } });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async desilikePost(id, userId) {
+    try {
+      return await Post.findByIdAndUpdate(id, { $pull: { likes: userId } });
     } catch (error) {
       throw error;
     }
