@@ -86,13 +86,11 @@ export class PostsController {
       if (!post) return next(new AppError(404, 'Not found', 'Post not found.'));
       // dislike
       const postLikes = post.likes;
-      const desilike = postLikes.some(async (element) => {
-        const check = await element.toString() === loggedin;
-        if (check) {
-          return await PostServicies.desilikePost(id, loggedin);
-        }
-      });
-      if (desilike) return outPut(res, 200, 'You unLiked Post successfully.', desilike);
+      const result = postLikes.includes(loggedin);
+      if (result) {
+        await PostServicies.desilikePost(id, loggedin);
+        return outPut(res, 200, 'You unLiked Post successfully.');
+      }
       // like
       const like = await PostServicies.likePost(id, loggedin);
       if (!like) return next(new AppError(400, 'Fail', 'Something went wrong try again'));
