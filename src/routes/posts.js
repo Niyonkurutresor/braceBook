@@ -13,5 +13,7 @@ routes.post('/:id/update', isLoggedIn, updateUserValidator, PostsController.upda
 routes.post('/createPost', isLoggedIn, PostsController.createPost);
 routes.get('/:id', isLoggedIn, PostsController.getpost);
 routes.post('/like/:id', isLoggedIn, PostsController.like);
+routes.get('/likes/:id', PostsController.likeNumber);
+routes.get('/likeDescription/:id', PostsController.likeDescription);
 
 export default routes;

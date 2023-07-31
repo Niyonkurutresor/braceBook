@@ -89,6 +89,90 @@ class imageVideoController {
       throw error;
     }
   }
+
+  static async like(req, res, next) {
+    try {
+      const { id } = req.params;
+      const loggedin = req.user.id;
+      if (!id) return next(new AppError(400, 'Bad request', 'Post id is required'));
+      const post = await postPictureVideoService.findById(id);
+      if (!post) return next(new AppError(404, 'Not found', 'Post not found.'));
+      // unLike
+      const postLikes = post.likes;
+      const result = postLikes.includes(loggedin);
+      if (result) {
+        await postPictureVideoService.unLikePost(id, loggedin);
+        return response(res, 200, 'You unLiked Post successfully.');
+      }
+      // like
+      const like = await postPictureVideoService.likePost(id, loggedin);
+      if (!like) return next(new AppError(400, 'Fail', 'Something went wrong try again'));
+      response(res, 200, 'Post liked successfully.', like);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async likeNumber(req, res, next) {
+    try {
+      const { id } = req.params;
+      if (!id) return next(new AppError(400, 'Bad request', 'Please select post.'));
+      const post = await postPictureVideoService.findById2(id);
+      if (!post) return next(new AppError(400, 'Bad request', 'Something went wrong, pleas try again later or contact support team.'));
+      const numberOfLikes = post.likes.reverse().length;
+      switch (numberOfLikes) {
+        case 0:
+          response(res, 200, 'No one likes your picture');
+          break;
+        case 1:
+          response(res, 200, `${post.likes[0].userName} likes your post`, numberOfLikes);
+          break;
+        case 2:
+          response(res, 200, `${post.likes[0].userName} and ${post.likes[1].userName} likes your post`, numberOfLikes);
+          break;
+        case 3:
+          response(res, 200, `${post.likes[0].userName}, ${post.likes[1].userName} and ${post.likes[2].userName} likes your post`, numberOfLikes);
+          break;
+        case 4:
+          response(res, 200, `${post.likes[0].userName}, ${post.likes[1].userName} and ${numberOfLikes - 2} others likes your post`, numberOfLikes);
+          break;
+
+        default:
+          response(res, 200, 'something went wrong.');
+          break;
+      }
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async likeDescription(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await postPictureVideoService.findById2(id);
+      if (!post) return next(new AppError(400, 'Bad request', 'Something went wrong, pleas try again later or contact support team.'));
+      const result = post.likes.reverse();
+      const userNames = result.map((person) => person.userName);
+      response(res, 200, 'people likes your post', userNames);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  // static async comment(req, res, next) {
+  //   try {
+  //     const { id } = req.params;
+  //     const loggedin = req.user.id;
+  //     if (!id) return next(new AppError(400, 'Bad request', 'Post id is required'));
+  //     const post = await postPictureVideoService.findById(id);
+  //     if (!post) return next(new AppError(404, 'Not found', 'Post not found.'));
+  //     // comment
+  //     const postCommetns = post.comments;
+
+  //   } catch (error) {
+  //     next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+  //   }
+  // }
 }
 
 export default imageVideoController;

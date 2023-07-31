@@ -100,6 +100,14 @@ class PostServicies {
       throw error;
     }
   }
+
+  static async findById2(id) {
+    try {
+      return await Post.findById(id).populate({ path: 'likes', select: '-_id userName' });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default PostServicies;

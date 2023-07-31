@@ -34,6 +34,38 @@ class postPictureVideoService {
       throw error;
     }
   }
+
+  static async findById(id) {
+    try {
+      return await ImageVideo.findById(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async findById2(id) {
+    try {
+      return await ImageVideo.findById(id).populate({ path: 'likes', select: '-_id userName' });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async likePost(id, loggedin) {
+    try {
+      return await ImageVideo.findByIdAndUpdate(id, { $push: { likes: loggedin } });
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async unLikePost(id, loggedin) {
+    try {
+      return await ImageVideo.findByIdAndUpdate(id, { $pull: { likes: loggedin } });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default postPictureVideoService;
