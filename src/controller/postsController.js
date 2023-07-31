@@ -99,4 +99,50 @@ export class PostsController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
+
+  static async likeNumber(req, res, next) {
+    try {
+      const { id } = req.params;
+      if (!id) return next(new AppError(400, 'Bad request', 'Please select post.'));
+      const post = await PostServicies.findById2(id);
+      if (!post) return next(new AppError(400, 'Bad request', 'Something went wrong, pleas try again later or contact support team.'));
+      const numberOfLikes = post.likes.reverse().length;
+      switch (numberOfLikes) {
+        case 0:
+          outPut(res, 200, 'No one likes your poar');
+          break;
+        case 1:
+          outPut(res, 200, `${post.likes[0].userName}  likes your post`, numberOfLikes);
+          break;
+        case 2:
+          outPut(res, 200, `${post.likes[0].userName} and ${post.likes[1].userName} likes your post`, numberOfLikes);
+          break;
+        case 3:
+          outPut(res, 200, `${post.likes[0].userName}, ${post.likes[1].userName} and ${post.likes[2].userName} likes your post`, numberOfLikes);
+          break;
+        case 4:
+          outPut(res, 200, `${post.likes[0].userName}, ${post.likes[1].userName} and ${numberOfLikes - 2} others likes your post`, numberOfLikes);
+          break;
+
+        default:
+          outPut(res, 200, 'something went wrong.');
+          break;
+      }
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
+
+  static async likeDescription(req, res, next) {
+    try {
+      const { id } = req.params;
+      const post = await PostServicies.findById2(id);
+      if (!post) return next(new AppError(400, 'Bad request', 'Something went wrong, pleas try again later or contact support team.'));
+      const result = post.likes.reverse();
+      const userNames = result.map((person) => person.userName);
+      outPut(res, 200, 'people likes your post', userNames);
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
 }
