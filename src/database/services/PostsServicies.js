@@ -108,14 +108,6 @@ class PostServicies {
       throw error;
     }
   }
-
-  static async comment(id, commentId) {
-    try {
-      return await Post.findByIdAndUpdate(id, { $push: { comments: commentId } });
-    } catch (error) {
-      throw error;
-    }
-  }
 }
 
 export default PostServicies;

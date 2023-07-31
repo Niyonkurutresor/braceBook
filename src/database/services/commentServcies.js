@@ -10,6 +10,22 @@ class CommentServicies {
       throw error;
     }
   }
+
+  static async findComment(id) {
+    try {
+      return await Comment.findById(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  static async deleteComment(id) {
+    try {
+      return await Comment.findByIdAndDelete(id);
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default CommentServicies;

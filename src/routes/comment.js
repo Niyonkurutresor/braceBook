@@ -6,5 +6,6 @@ import { isLoggedIn } from '../middleware/authorization copy.js';
 
 const routes = express();
 routes.post('/text/:id', isLoggedIn, CommentController.createTextComment);
+routes.delete('/text/delete/:id', isLoggedIn, CommentController.deleteTextComment);
 routes.post('/doc/:id', isLoggedIn, CommentController.createDocComment);
 export default routes;
