@@ -39,7 +39,7 @@ class imageVideoController {
           }
         }
       } catch (error) {
-        next(new AppError(500, 'Fail', error));
+        next(new AppError(500, 'INTERNAL SERVER ERROR', error));
       }
     });
   }
@@ -72,7 +72,7 @@ class imageVideoController {
           }
         }
       } catch (error) {
-        next(new AppError(500, 'Fail', error));
+        next(new AppError(500, 'ENTERNAL SERVER ERROR', error));
       }
     });
   }
