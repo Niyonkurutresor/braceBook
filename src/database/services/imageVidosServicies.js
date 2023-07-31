@@ -66,6 +66,14 @@ class postPictureVideoService {
       throw error;
     }
   }
+
+  static async comment(id, commentId) {
+    try {
+      return await ImageVideo.findByIdAndUpdate(id, { $push: { comments: commentId } });
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 export default postPictureVideoService;
