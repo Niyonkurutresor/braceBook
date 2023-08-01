@@ -8,4 +8,6 @@ const routes = express();
 routes.post('/text/:id', isLoggedIn, CommentController.createTextComment);
 routes.delete('/text/delete/:id', isLoggedIn, CommentController.deleteTextComment);
 routes.post('/doc/:id', isLoggedIn, CommentController.createDocComment);
+routes.delete('/doc/delete/:id', isLoggedIn, CommentController.deleteDocComment);
+
 export default routes;
