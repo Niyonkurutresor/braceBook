@@ -158,21 +158,6 @@ class imageVideoController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
-
-  // static async comment(req, res, next) {
-  //   try {
-  //     const { id } = req.params;
-  //     const loggedin = req.user.id;
-  //     if (!id) return next(new AppError(400, 'Bad request', 'Post id is required'));
-  //     const post = await postPictureVideoService.findById(id);
-  //     if (!post) return next(new AppError(404, 'Not found', 'Post not found.'));
-  //     // comment
-  //     const postCommetns = post.comments;
-
-  //   } catch (error) {
-  //     next(new AppError(500, 'INTERNAL SERVER ERROR', error));
-  //   }
-  // }
 }
 
 export default imageVideoController;
