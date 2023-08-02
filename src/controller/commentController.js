@@ -53,6 +53,19 @@ class CommentController {
       next(new AppError(500, 'INTERNAL SERVER ERROR', error));
     }
   }
+
+  static async deleteDocComment(req, res, next) {
+    try {
+      const { id } = req.user;
+      const comment = await CommentServicies.findComment(req.params.id);
+      if (!comment) return next(new AppError(404, 'Not found', 'Comment not found.'));
+      if (id !== comment.commnetFrom.toString() && id !== (await picImagePost.findById(comment.postId)).postOwner.toString()) return next(new AppError(403, 'Forbidden', 'You are not allowed to delete this comment'));
+      await CommentServicies.deleteComment(req.params.id);
+      response(res, 200, 'Comment delete successfully.');
+    } catch (error) {
+      next(new AppError(500, 'INTERNAL SERVER ERROR', error));
+    }
+  }
 }
 
 export default CommentController;
