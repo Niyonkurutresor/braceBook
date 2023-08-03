@@ -64,6 +64,22 @@ const userSchema = new mongoose.Schema({
     type: Boolean,
     default: true,
   },
+  friends: [{
+    type: mongoose.Schema.ObjectId,
+    ref: 'User',
+  }],
+  sentFriendRequests: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    }
+  ],
+  receivedFriendRequests: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: 'User',
+    }
+  ],
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpired: Date,

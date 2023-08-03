@@ -381,6 +381,28 @@
                 ],
                 "summary": "reset password",
                 "description": "reset lost password by sending email",
+                "parameters": [
+                    {
+                      "name": "email",
+                      "in": "query",
+                      "required": true,
+                      "schema": {
+                        "type": "string",
+                        "default": "email"
+                      },
+                      "description": "user Email"
+                    },
+                    {
+                        "name": "resetToken",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                          "type": "string",
+                          "default": "resetToken ey...."
+                        },
+                        "description": "user token"
+                      }
+                  ],
                 "requestBody": {
                     "required": "true",
                     "content": {
