@@ -1,15 +1,27 @@
 import mongoose from 'mongoose';
 
-const friendshipSchema = new mongoose.Schema({
-  accountOwner: {
-    type: mongoose.Schema.Object,
+const friendRequestSchema = new mongoose.Schema({
+  senderId: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
+    required: true,
   },
-  friend: {
-    type: mongoose.Schema.Object,
+  receiverId: {
+    type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  }
+    required: true,
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'accepted', 'rejected'],
+    default: 'pending',
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now,
+  },
 });
 
-const Friends = mongoose.model('Friends', friendshipSchema);
-export default Friends;
+const FriendRequest = mongoose.model('FriendRequest', friendRequestSchema);
+
+export default FriendRequest;
