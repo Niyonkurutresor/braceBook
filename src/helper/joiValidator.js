@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable import/extensions */
-import AppError from "./AppError.js";
+import AppError from './AppError.js';
 
 // export default async (schema, userData, next) => {
 //   try {
