@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import morgan from 'morgan';
 import swaggerUI from 'swagger-ui-express';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
+import cors from 'cors';
 // import xss from 'xss';
 import { readFile } from 'fs/promises';
 import databaseconnection from './src/database/dbConnection.js';
@@ -43,6 +44,9 @@ const docs = JSON.parse(
 );
 
 app.use(morgan('dev'));
+app.use(cors({
+  origin: ['http://127.0.0.1:5501', 'http://localhost:5501']
+}));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(ExpressMongoSanitize());

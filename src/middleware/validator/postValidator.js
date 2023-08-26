@@ -4,5 +4,5 @@ import joiValidator from '../../helper/joiValidator.js';
 import { updatePostSchema } from './model/post/updatePost.js';
 
 export const updateUserValidator = (req, res, next) => {
-  joiValidator(updatePostSchema, req.body, res, next);
+  joiValidator(updatePostSchema, req.body, next);
 };

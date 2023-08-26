@@ -12,6 +12,7 @@ const sendErrProd = (err, res) => {
   if (err.originalError.name === 'JsonWebTokenError') return res.status(401).json({ status: 'Fail', message: 'invalid token' });
   if (err.originalError.name === 'NetworkError') return res.status(401).json({ status: 'Fail', message: 'invalid token' });
   if (err.originalError.name === 'CastError') return res.status(401).json({ status: 'Fail', message: 'Invalid data type provided for a field.' });
+  if (err.originalError.name === 'ValidationError') return res.status(401).json({ status: 'Fail', message: 'Invalid data type provided for a field.' });
   if (err.isOperation) return res.status(err.statusCode).json({ message: err.message });
 
   res.status(500).json({ message: 'An unexpected error occurred.' });
