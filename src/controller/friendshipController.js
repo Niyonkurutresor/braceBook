@@ -16,6 +16,7 @@ class friendship {
       if (!sender || !receiver) return next(new AppError(404, 'Not found', 'User is not found.'));
 
       // Check if a friend request between the users already exists
+      
       if (sender.sentFriendRequests.includes(receiverId) || receiver.receivedFriendRequests.includes(senderId)) {
         return next(new AppError(400, 'Bad requet', 'Friend request already sent'));
       }
